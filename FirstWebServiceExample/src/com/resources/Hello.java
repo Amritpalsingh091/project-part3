@@ -24,33 +24,28 @@ public class Hello
 	@Produces("text/json")
 	public String getJSONFile(@PathParam("GPA")Double grade1)throws Exception, IOException{
 		
-
 		String json = FileReader.loadFileIntoString("Json/August.json","utf-8");
 		JSONArray Firstparse = JSONArray.fromObject(json);
 		String hey="";
-		
+		JSONArray result = new JSONArray();
 		for(int i = 0;i<Firstparse.size();i++){
 			JSONObject GPA1 = Firstparse.getJSONObject(i);
 			
+			
 			 double grade = GPA1.getDouble("GPA");
-			//System.out.println(grade);
+			
 			 if(grade>grade1){
-				 double finalgrades = grade;
-				 //System.out.println(finalgrades);	
-				 JSONObject info =new JSONObject();
-				 hey = Firstparse.toString();
-				 //info.accumulate("id", GPA1.getString("Id"));
-				 // info.accumulate("firstname", GPA1.getString("First_Name"));
-				 //info.accumulate("lastname", GPA1.getString("Last_Name"));
-				 //info.accumulate("dob", GPA1.getString("DOB"));
-				 System.out.println(hey);
+				 
+				 result.add(GPA1);
+				 
+				 
 				 
 				 
 				
 			 }
 			
 		}
-		 return hey;
+		 return result.toString();
 
 	}
 
